@@ -1,8 +1,8 @@
-const core = require("@actions/core");
-const github = require("@actions/github");
-
 const cp = require("child_process");
 cp.execSync("npm install");
+
+const core = require("@actions/core");
+const github = require("@actions/github");
 
 const fs = require("fs");
 const GIFEncoder = require("gifencoder");
