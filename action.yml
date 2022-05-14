@@ -2,8 +2,15 @@ name: "Generating profile terminal"
 author: "AceKiron"
 description: "Generates a terminal GIF for your profile's README"
 runs:
-    using: "node16"
-    main: "index.js"
+    using: "composite"
+    steps:
+        - run: actions/setup-node@v3
+          with:
+            node-version: 16.x
+            cache: 'npm'
+        - run: npm i
+        - run: node index.js
+    # main: "index.js"
 inputs:
     username:
         description: "Username to generate a profile terminal for"
