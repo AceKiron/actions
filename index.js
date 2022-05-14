@@ -2,8 +2,6 @@ const cp = require("child_process");
 
 const path_prefix = process.argv[process.argv.length - 1];
 
-const core = require(path_prefix + "/node_modules/@actions/core");
-
 const fs = require("fs");
 const GIFEncoder = require(path_prefix + "/node_modules/gifencoder");
 const { createCanvas } = require(path_prefix + "/node_modules/canvas");
@@ -121,10 +119,10 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
     const tc = new TerminalCanvas(width, height);
 
     const encoder = new GIFEncoder(width, height);
-    // encoder.createReadStream().pipe(fs.createWriteStream(core.getInput("output-path")));
+    // encoder.createReadStream().pipe(fs.createWriteStream(userData["output-path"]));
 
     const stream = encoder.createWriteStream({ repeat: 0, delay: 125, quality: 10})
-                .pipe(fs.createWriteStream(core.getInput("output-path")));
+                .pipe(fs.createWriteStream(userData["output-path"]));
     
     stream.on("finish", function () {
         // Upload to GitHub
