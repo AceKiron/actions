@@ -10,7 +10,7 @@ runs:
             cache: 'npm'
         - run: npm i @actions/core axios gifencoder
           shell: bash
-        - run: node $GITHUB_ACTION_PATH/index.js $CDPATH
+        - run: pwd | node $GITHUB_ACTION_PATH/index.js {}
           shell: bash
     # main: "index.js"
 inputs:
