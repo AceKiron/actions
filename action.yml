@@ -10,7 +10,7 @@ runs:
             cache: 'npm'
         - run: npm i @actions/core axios gifencoder
           shell: bash
-        - run: pwd | xargs node $GITHUB_ACTION_PATH/index.js ${{ inputs }}
+        - run: pwd | xargs node $GITHUB_ACTION_PATH/index.js username=${{ inputs.username }} output=${{ inputs.output-path }} company=${{ inputs.company }} country=${{ inputs.country }} website=${{ inputs.website }} pronouns=${{ inputs.pronouns }}
           shell: bash
 inputs:
     username:
