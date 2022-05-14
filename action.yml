@@ -8,7 +8,7 @@ runs:
           with:
             node-version: 16.x
             cache: 'npm'
-        - run: npm i
+        - run: npm i @actions/core axios gifencoder
           shell: bash
         - run: node $GITHUB_ACTION_PATH/index.js
           shell: bash
