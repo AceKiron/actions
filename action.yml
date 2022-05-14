@@ -1,0 +1,8 @@
+name: "Sample name"
+author: "AceKiron"
+description: "Skeleton for further actions"
+runs:
+  using: "node16"
+  main: "index.js"
+
+# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
