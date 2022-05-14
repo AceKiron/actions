@@ -4,7 +4,7 @@ description: "Generates a terminal GIF for your profile's README"
 runs:
     using: "composite"
     steps:
-        - run: actions/setup-node@v3
+        - uses: actions/setup-node@v3
           with:
             node-version: 16.x
             cache: 'npm'
