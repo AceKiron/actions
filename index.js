@@ -1,6 +1,9 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
+const cp = require("child_process");
+cp.execSync("npm install");
+
 const fs = require("fs");
 const GIFEncoder = require("gifencoder");
 const { createCanvas } = require("canvas");
@@ -118,7 +121,6 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
     
     stream.on("finish", function () {
         // Upload to GitHub
-        const cp = require("child_process");
         cp.execSync("git add assets/animated-terminal.gif");
         cp.execSync("git config --local user.email \"41898282+github-actions[bot]@users.noreply.github.com\"");
         cp.execSync("git config --local user.name \"github-actions[bot]\"");
