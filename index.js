@@ -2,6 +2,8 @@ const cp = require("child_process");
 
 const path_prefix = process.argv[process.argv.length - 1];
 
+const core = require(path_prefix + "/node_modules/@actions/core");
+
 const fs = require("fs");
 const GIFEncoder = require(path_prefix + "/node_modules/gifencoder");
 const { createCanvas } = require(path_prefix + "/node_modules/canvas");
