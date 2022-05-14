@@ -1,11 +1,13 @@
 const cp = require("child_process");
 
-const core = require(__dirname + "/node_modules/@actions/core");
+const path_prefix = process.argv[2];
+
+const core = require(path_prefix + "/node_modules/@actions/core");
 
 const fs = require("fs");
-const GIFEncoder = require(__dirname + "/node_modules/gifencoder");
-const { createCanvas } = require(__dirname + "/node_modules/canvas");
-const axios = require(__dirname + "/node_modules/axios");
+const GIFEncoder = require(path_prefix + "/node_modules/gifencoder");
+const { createCanvas } = require(path_prefix + "/node_modules/canvas");
+const axios = require(path_prefix + "/node_modules/axios");
 
 let username, usernameLowercase;
 
