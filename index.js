@@ -131,7 +131,7 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
         cp.execSync("git add assets/animated-terminal.gif");
         cp.execSync("git config --local user.email \"41898282+github-actions[bot]@users.noreply.github.com\"");
         cp.execSync("git config --local user.name \"github-actions[bot]\"");
-        cp.execSync("git commit -m \"Animated terminal updated\" -a --alow-empty");
+        cp.execSync("git commit -m \"Animated terminal updated\" -a --allow-empty");
         cp.execSync("git push");
     });
 
