@@ -11,13 +11,6 @@ const axios = require(path_prefix + "/node_modules/axios");
 
 let username, usernameLowercase;
 
-try {
-    username = core.getInput("username");
-    usernameLowercase = username.toLowerCase();
-} catch (error) {
-    core.setFailed(error.message);
-}
-
 section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, followers }) => {
     const width = 450;
     const height = 338;
@@ -207,64 +200,71 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
     encoder.finish();
 }
 
-axios({
-    url: process.env.GITHUB_GRAPHQL_URL,
-    method: "post",
-    headers: {
-        Authorization: `token ${process.env.GITHUB_TOKEN}`
-    },
-    data: {
-        login: {
-            username: username
+try {
+    username = core.getInput("username");
+    usernameLowercase = username.toLowerCase();
+
+    axios({
+        url: process.env.GITHUB_GRAPHQL_URL,
+        method: "post",
+        headers: {
+            Authorization: `token ${process.env.GITHUB_TOKEN}`
         },
-        query: `
-        {
-          user(login: "${username}") {
-            contributionsCollection {
-              totalCommitContributions
-            }
-            repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
-              totalCount
-            }
-            pullRequests(first: 1) {
-              totalCount
-            }
-            openIssues: issues(states: OPEN) {
-              totalCount
-            }
-            closedIssues: issues(states: CLOSED) {
-              totalCount
-            }
-            followers {
-              totalCount
-            }
-            repositories(first: 100, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
-              totalCount
-              nodes {
-                stargazers {
+        data: {
+            login: {
+                username: username
+            },
+            query: `
+            {
+              user(login: "${username}") {
+                contributionsCollection {
+                  totalCommitContributions
+                }
+                repositoriesContributedTo(first: 1, contributionTypes: [COMMIT, ISSUE, PULL_REQUEST, REPOSITORY]) {
                   totalCount
+                }
+                pullRequests(first: 1) {
+                  totalCount
+                }
+                openIssues: issues(states: OPEN) {
+                  totalCount
+                }
+                closedIssues: issues(states: CLOSED) {
+                  totalCount
+                }
+                followers {
+                  totalCount
+                }
+                repositories(first: 100, ownerAffiliations: OWNER, orderBy: {direction: DESC, field: STARGAZERS}) {
+                  totalCount
+                  nodes {
+                    stargazers {
+                      totalCount
+                    }
+                  }
                 }
               }
             }
-          }
+            `
         }
-        `
-    }
-}).then((res) => {
-    console.log(res.data);
-
-    const user = res.data.data.user;
-
-    const totalStars = user.repositories.nodes.map((val) => val.stargazers.totalCount).reduce((partialSum, a) => partialSum + a, 0);
-    const totalCommits = user.contributionsCollection.totalCommitContributions;
-    const totalPRs = user.pullRequests.totalCount;
-    const totalIssues = user.openIssues.totalCount + user.closedIssues.totalCount;
-    const contributedTo = user.repositoriesContributedTo.totalCount;
-    const followers = user.followers.totalCount;
+    }).then((res) => {
+        console.log(res.data);
     
-    console.log("API response received");
+        const user = res.data.data.user;
     
-    section2({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, followers });
-}).catch((err) => {
-    core.setFailed(err.message);
-});
+        const totalStars = user.repositories.nodes.map((val) => val.stargazers.totalCount).reduce((partialSum, a) => partialSum + a, 0);
+        const totalCommits = user.contributionsCollection.totalCommitContributions;
+        const totalPRs = user.pullRequests.totalCount;
+        const totalIssues = user.openIssues.totalCount + user.closedIssues.totalCount;
+        const contributedTo = user.repositoriesContributedTo.totalCount;
+        const followers = user.followers.totalCount;
+        
+        console.log("API response received");
+        
+        section2({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, followers });
+    }).catch((err) => {
+        core.setFailed(err.message);
+    });
+} catch (error) {
+    core.setFailed(error.message);
+}
