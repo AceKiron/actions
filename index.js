@@ -205,6 +205,7 @@ try {
     usernameLowercase = username.toLowerCase();
 
     console.log(`Username: ${username}`);
+    console.log(process.env);
 
     axios({
         url: process.env.GITHUB_GRAPHQL_URL,
