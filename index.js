@@ -1,6 +1,6 @@
 const cp = require("child_process");
 
-const core = require("@actions/core");
+const core = require(__dirname + "/node_modules/@actions/core");
 
 const fs = require("fs");
 const GIFEncoder = require(__dirname + "/node_modules/gifencoder");
