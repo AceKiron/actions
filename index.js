@@ -1,6 +1,6 @@
 const cp = require("child_process");
 const buffer = cp.execSync("npm install @actions/core gifencoder axios");
-console.log(buffer);
+console.log(buffer.toString("utf8"));
 
 const core = require("@actions/core");
 
