@@ -9,7 +9,9 @@ runs:
             node-version: 16.x
             cache: 'npm'
         - run: npm i
+          shell: bash
         - run: node index.js
+          shell: bash
     # main: "index.js"
 inputs:
     username:
