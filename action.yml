@@ -10,7 +10,7 @@ runs:
             cache: 'npm'
         - run: npm i
           shell: bash
-        - run: node index.js
+        - run: node $GITHUB_ACTION_PATH/index.js
           shell: bash
     # main: "index.js"
 inputs:
