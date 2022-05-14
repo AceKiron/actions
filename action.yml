@@ -12,6 +12,8 @@ runs:
           shell: bash
         - run: ls -a
           shell: bash
+        - run: env
+          shell: bash
         - run: node $GITHUB_ACTION_PATH/index.js
           shell: bash
     # main: "index.js"
