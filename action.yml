@@ -1,8 +1,25 @@
-name: "Sample name"
+name: "Generating profile terminal"
 author: "AceKiron"
-description: "Skeleton for further actions"
+description: "Generates a terminal GIF for your profile's README"
 runs:
-  using: "node16"
-  main: "index.js"
-
-# https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
+    using: "node16"
+    main: "index.js"
+inputs:
+    username:
+        description: "Username to generate a profile terminal for"
+        required: true
+    output-path:
+        description: "Path to where you want the GIF file to be located"
+        required: true
+    company:
+        description: "The company the user works at"
+        required: false
+    country:
+        description: "Country user lives in"
+        required: false
+    website:
+        description: "The website of the user"
+        required: false
+    pronouns:
+        description: "The pronouns the user uses"
+        required: false
