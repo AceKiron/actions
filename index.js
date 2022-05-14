@@ -251,6 +251,8 @@ axios({
         `
     }
 }).then((res) => {
+    console.log(res.data);
+
     const user = res.data.data.user;
 
     const totalStars = user.repositories.nodes.map((val) => val.stargazers.totalCount).reduce((partialSum, a) => partialSum + a, 0);
