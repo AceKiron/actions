@@ -204,6 +204,8 @@ try {
     username = core.getInput("username");
     usernameLowercase = username.toLowerCase();
 
+    console.log(`Username: ${username}`);
+
     axios({
         url: process.env.GITHUB_GRAPHQL_URL,
         method: "post",
