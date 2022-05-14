@@ -3,9 +3,9 @@ const cp = require("child_process");
 const core = require("@actions/core");
 
 const fs = require("fs");
-const GIFEncoder = require("gifencoder");
-const { createCanvas } = require("canvas");
-const axios = require("axios");
+const GIFEncoder = require(__dirname + "/node_modules/gifencoder");
+const { createCanvas } = require(__dirname + "/node_modules/canvas");
+const axios = require(__dirname + "/node_modules/axios");
 
 let username, usernameLowercase;
 
