@@ -12,7 +12,6 @@ runs:
           shell: bash
         - run: pwd | xargs node $GITHUB_ACTION_PATH/index.js
           shell: bash
-    # main: "index.js"
 inputs:
     username:
         description: "Username to generate a profile terminal for"

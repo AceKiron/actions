@@ -211,7 +211,7 @@ axios({
     url: process.env.GITHUB_GRAPHQL_URL,
     method: "post",
     headers: {
-        Authorization: `token ${ACTIONS_RUNTIME_TOKEN}`
+        Authorization: `token ${process.env.ACTIONS_RUNTIME_TOKEN}`
     },
     data: {
         login: {
