@@ -1,6 +1,6 @@
 const cp = require("child_process");
 
-const path_prefix = process.argv[2];
+const path_prefix = process.argv[process.argv.length - 1];
 
 const core = require(path_prefix + "/node_modules/@actions/core");
 
@@ -9,7 +9,21 @@ const GIFEncoder = require(path_prefix + "/node_modules/gifencoder");
 const { createCanvas } = require(path_prefix + "/node_modules/canvas");
 const axios = require(path_prefix + "/node_modules/axios");
 
+let userData = {};
+
+for (const arg of process.argv) {
+    if (arg.includes("=")) {
+        const split = arg.split("=");
+        userData[split[0]] = split[1];
+    }
+}
+
 let username, usernameLowercase;
+
+username = userData["username"];
+usernameLowercase = username.toLowerCase();
+
+console.log(`Username: ${username}`);
 
 section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, followers }) => {
     const width = 450;
@@ -183,10 +197,10 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
     addFrameLooped(encoder, tc.render(), 5);
 
     const userdata = {
-        company: core.getInput("company"),
-        country: core.getInput("country"),
-        website: core.getInput("website"),
-        pronouns: core.getInput("pronouns")
+        company: userData["company"],
+        country: userData["country"],
+        website: userData["website"],
+        pronouns: userData["pronouns"]
     };
 
     if (userdata.company) { tc.addLine("Company:  " + userdata.company); encoder.addFrame(tc.render()); }
@@ -201,12 +215,6 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
 }
 
 try {
-    username = core.getInput("username");
-    usernameLowercase = username.toLowerCase();
-
-    console.log(`Username: ${username}`);
-    console.log(process.env);
-
     axios({
         url: process.env.GITHUB_GRAPHQL_URL,
         method: "post",
