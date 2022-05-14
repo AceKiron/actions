@@ -121,10 +121,10 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
     const tc = new TerminalCanvas(width, height);
 
     const encoder = new GIFEncoder(width, height);
-    // encoder.createReadStream().pipe(fs.createWriteStream(userData["output-path"]));
+    // encoder.createReadStream().pipe(fs.createWriteStream(userData["output"]));
 
     const stream = encoder.createWriteStream({ repeat: 0, delay: 125, quality: 10})
-                .pipe(fs.createWriteStream(userData["output-path"]));
+                .pipe(fs.createWriteStream(userData["output"]));
     
     stream.on("finish", function () {
         // Upload to GitHub
