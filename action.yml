@@ -1,8 +1,27 @@
-name: "Sample name"
+name: "Push to repository"
 author: "AceKiron"
-description: "Skeleton for further actions"
+description: "Pushes changes to the current repository"
 runs:
   using: "node16"
   main: "index.js"
-
+inputs:
+  files:
+    description: "Files to push"
+    required: false
+    default: "*"
+  message:
+    description: "Commit message"
+    required: false
+    default: "Automated commit"
+  branch:
+    description: "Branch to push to"
+    required: false
+    default: "main"
+  commit-flags:
+    description: "Flags for the git commit command"
+    required: false
+    default: "-a --allow-empty"
+  push-flags:
+    description: "Flags for the git push command"
+    required: false
 # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions
