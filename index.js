@@ -1,5 +1,3 @@
-const cp = require("child_process");
-
 const path_prefix = process.argv[process.argv.length - 1];
 
 const core = require(path_prefix + "/node_modules/@actions/core");
@@ -125,15 +123,6 @@ section2 = ({ totalStars, totalCommits, totalPRs, totalIssues, contributedTo, fo
 
     const stream = encoder.createWriteStream({ repeat: 0, delay: 125, quality: 10})
                 .pipe(fs.createWriteStream(userData["output"]));
-    
-    stream.on("finish", function () {
-        // Upload to GitHub
-        cp.execSync("git add assets/animated-terminal.gif");
-        cp.execSync("git config --local user.email \"41898282+github-actions[bot]@users.noreply.github.com\"");
-        cp.execSync("git config --local user.name \"github-actions[bot]\"");
-        cp.execSync("git commit -m \"Animated terminal updated\" -a --allow-empty");
-        cp.execSync("git push");
-    });
 
     encoder.start();
 
